@@ -94,28 +94,16 @@ public class GameWindow extends JFrame implements ActionListener {
         
         
         //Partie Maison 
-        
         cont.gridx=0;
         cont.gridy=7;
-        pano.add(new JLabel(" Maisons : "),cont);
-        cont.gridx=1;
-        pano.add(add_home,cont);
-
-        // Il s'agit du test de la boucle et ça marche !!! 
-        // this.town.getHomes().add(new Home(1,10,12,15,17,25));this.town.setNb_home(1);
+        cont.gridwidth=5;
+        BuiltInternalWindow internal_home= new BuiltInternalWindow(town,"home");
+        pano.add(internal_home,cont);
+        cont.gridwidth=1;
+        
        
-        for(int i=0;i<town.getNb_home();i++){
-            cont.gridx=0;
-            cont.gridy+=1;
-            cont.gridwidth=3;
-            pano.add(new JLabel(" Numero : "+town.getHomes().get(i).getId()+" | Niveau : "+town.getHomes().get(i).getLevel()+" | Conso au niveau supérieur : "+town.getHomes().get(i).getEat_neededlvlup()+" | Habitants au niveau supérieur : "+town.getHomes().get(i).getNb_hablvlup()+" | Coût en bois pour niveau suivant  : "+town.getHomes().get(i).getWood_pricelvlup()+" | "),cont);
-            cont.gridx=4;
-            cont.gridwidth=1;
-            int lp=town.getHomes().get(i).getLevel()+1;
-            lvlup_homes.add(new JButton(" Passer la maison au niveau : "+lp+" "));
-            lvlup_homes.get(i).addActionListener(this);
-            pano.add(lvlup_homes.get(i),cont);
-        }
+       
+        
         
         //Partie Ferme
        
@@ -279,10 +267,7 @@ public class GameWindow extends JFrame implements ActionListener {
            this.SaveGame();
        }
        if(e.getSource()==add_home){
-           if(AddController.AddHome(town,town.getNb_wood(),town.getProd_food())==true){
-               panos.removeAll();
-               this.init();
-           }
+
        }
        if(e.getSource()==add_sawmill){
            if(AddController.AddSawMill(town,town.getNb_hab_free())){
